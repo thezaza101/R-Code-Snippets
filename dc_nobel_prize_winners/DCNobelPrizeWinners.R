@@ -6,7 +6,12 @@
 library(tidyverse)
 
 # Reading in the Nobel Prize data
-nobel <- read_csv('datasets/nobel.csv')
+nobel <- read_csv('datasets/nobel1.csv')
+
+# This is required to make all the dates consistant in the dataset
+frmtdate  <- as.Date(nobel$birth_date, format="%Y-%m-%d")
+nobel$birth_date[!is.na(frmtdate)] <- format(frmtdate[!is.na(frmtdate)], "%d/%m/%Y")
+
 
 # Taking a look at the first couple of winners
 head(nobel)
@@ -94,3 +99,11 @@ nobel_age %>% top_n(1, desc(age))
 
 ## Task 11
 youngest_winner <- "Malala Yousafzai"
+
+
+# png("myplot.png")
+# myplot <- ggplot(mtcars, aes(wt, mpg)) + geom_point()
+# print(myplot)
+# dev.off()
+
+# sapply
