@@ -10,6 +10,7 @@
 
 # Datasets
 [Dd]ata/
+[Dd]atasets/
 [Oo]utput/
 
 # Output files from R CMD build
