@@ -4,6 +4,7 @@
 ## Task 1
 # Loading in required libraries
 library(tidyverse)
+#source("R/formatDate.R")
 
 # Reading in the Nobel Prize data
 nobel <- read_csv('datasets/nobel1.csv')
@@ -12,6 +13,8 @@ nobel <- read_csv('datasets/nobel1.csv')
 frmtdate  <- as.Date(nobel$birth_date, format="%Y-%m-%d")
 nobel$birth_date[!is.na(frmtdate)] <- format(frmtdate[!is.na(frmtdate)], "%d/%m/%Y")
 
+
+#nobel[,"birth_date"] <- sapply(nobel[,"birth_date"], function(x) formatDate(x))
 
 # Taking a look at the first couple of winners
 head(nobel)
