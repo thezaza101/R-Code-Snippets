@@ -1,4 +1,6 @@
 ## https://projects.datacamp.com/projects/62
+## Phyllotaxis: Draw flowers using mathematics
+
 ## Task 1
 # This sets plot images to a nice size.
 options(repr.plot.width = 4, repr.plot.height = 4)

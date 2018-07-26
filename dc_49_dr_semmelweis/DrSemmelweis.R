@@ -1,4 +1,6 @@
 ## https://projects.datacamp.com/projects/49
+## Dr. Semmelweis and the discovery of handwashing
+
 ## Task 1
 # Load in the tidyverse package
 library(tidyverse)

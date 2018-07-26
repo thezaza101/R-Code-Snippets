@@ -1,6 +1,8 @@
 ## Note that this is not based on the official data camp project
 ## Taskes were sourced from github and the data from kaggle
 
+## A Visual History of Nobel Prize Winners
+
 ## Task 1
 # Loading in required libraries
 library(tidyverse)
