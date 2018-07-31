@@ -8,6 +8,21 @@
 # Example code in package build process
 *-Ex.R
 
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# Visual Studio Code
+.vscode/
+
 # Datasets
 [Dd]ata/
 [Dd]atasets/
