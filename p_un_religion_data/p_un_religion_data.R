@@ -6,9 +6,13 @@ flaterData <- rawData %>% spread(sex, value)
 
 unqueReligions <- unique(flaterData$religion)
 
-totalChangeOverTime <- flaterData %>% group_by(religion) %>% filter(area=="Total")
+totalChangeOverTime <- flaterData %>% 
+  group_by(religion) %>% 
+  filter(area=="Total", country_or_area=="Australia", religion!="Total") %>% 
+  select(country_or_area, year, religion, Male, Female) 
 
+totalChangeOverTime <- totalChangeOverTime %>% arrange(desc(Male + Female)) %>% head(30)
 
-
-## Non-religion = "Agnostic", "Atheist", "No religion, Agnostic, Atheist" 
-## "Humanist", 
+ggplot(totalChangeOverTime, aes(year, Male+Female, color = religion)) + 
+  geom_line() 
+## + theme(legend.position="none")
