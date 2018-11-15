@@ -2,33 +2,33 @@
 library(tidyverse)
 
 # Read the raw data
-book_lines <- c(read_lines("datasets/1.The_Hunger_Games.txt"),
+lines <- c(read_lines("datasets/1.The_Hunger_Games.txt"),
                 read_lines("datasets/2.Catching_Fire.txt"),
                 read_lines("datasets/3.1.Mockingjay.txt"),
                 read_lines("datasets/3.2.Mockingjay.txt"))
 
 # Remove the punctuation from the book
-book_lines <- gsub('[[:punct:]]+','',book_lines)
+lines <- gsub('[[:punct:]]+','',lines)
 
 # Split the data by spaces
-book_words <- strsplit(book_lines," ",fixed = T)
+words <- strsplit(lines," ",fixed = T)
 
 # Remove "character(0)" type
-book_words <- book_words[!sapply(book_words, identical, character(0))]
+words <- words[!sapply(words, identical, character(0))]
 
 # Flatten the list
-book_words <- flatten(book_words)
+words <- flatten(words)
 
 # Covert all the words to lowercase
-book_words <- lapply(book_words, tolower)
+words <- lapply(words, tolower)
 
 # Convert the list to a dataframe
-book_words_df = data.frame(unlist(book_words))
+words_df = data.frame(unlist(words))
 
 # Count the number of words
-count <- book_words_df %>% 
-  group_by(unlist.book_words.) %>% 
-  filter(!unlist.book_words.=="") %>% 
+count <- words_df %>% 
+  group_by(unlist.words.) %>% 
+  filter(!unlist.words.=="") %>% 
   count(sort=TRUE) %>%
   arrange(desc(n)) %>%
   head(50)
@@ -40,19 +40,21 @@ maxval = head(count,1)$n
 count <- tibble::rowid_to_column(count, "row_number")
 
 # Add Zipf value based on the maximum value of n
-count <- count %>%
-  filter(!is.na(unlist.book_words.)) %>%
+# count <- count %>%
+count %<>%
+  filter(!is.na(unlist.words.)) %>%
   arrange(desc(n)) %>%
   mutate(zipfval = maxval/row_number)
 
 # Plot the findings
-ggplot(count, aes(x=reorder(unlist.book_words., -n), y=n)) +
-  geom_bar(stat = "identity") + 
-  geom_line(aes(x=row_number, y=n, color="Actual frequency"), size=2) + 
-  geom_line(aes(x=row_number, y=zipfval, color="Zipf frequency"), size=2) +
-  coord_cartesian(xlim = c(0, 50)) +
+ggplot(count, aes(x=reorder(unlist.words., -n), y=n)) +
+  geom_bar(stat = "identity", fill="deepskyblue1") + 
+  geom_bar(aes(y=zipfval),stat = "identity", fill="dodgerblue4") + 
+  geom_line(aes(x=row_number, y=n, color="Actual frequency"), size=1) + 
+  geom_line(aes(x=row_number, y=zipfval, color="Zipf frequency"), size=1) +
+  coord_cartesian(xlim = c(0, 50), ylim = c(0, maxval)) +
   labs(title="Actual frequency vs Zipf frequency",
-       subtitle="Word frequency in the hunger games novels vs zipf frequency",
+       subtitle="Word frequency in the hunger games",
        x="Word",
        y="Frequency",
        colour="") +
